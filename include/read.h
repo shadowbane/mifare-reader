@@ -30,11 +30,9 @@ void execReader()
 
     mfrc522.PICC_DumpDetailsToSerial(&(mfrc522.uid)); //dump some details about the card
 
-    //mfrc522.PICC_DumpToSerial(&(mfrc522.uid));      //uncomment this to see all blocks in hex
+    // mfrc522.PICC_DumpToSerial(&(mfrc522.uid));      //uncomment this to see all blocks in hex
 
     //-------------------------------------------
-
-    Serial.print(F("NIM: "));
 
     byte buffer1[18];
 
@@ -47,6 +45,10 @@ void execReader()
     {
         Serial.print(F("Authentication failed: "));
         Serial.println(mfrc522.GetStatusCodeName(status));
+        Serial.println(F("\n**End Reading**\n"));
+
+        mfrc522.PICC_HaltA();
+        mfrc522.PCD_StopCrypto1();
         return;
     }
 
@@ -55,6 +57,10 @@ void execReader()
     {
         Serial.print(F("Reading failed: "));
         Serial.println(mfrc522.GetStatusCodeName(status));
+        Serial.println(F("\n**End Reading**\n"));
+
+        mfrc522.PICC_HaltA();
+        mfrc522.PCD_StopCrypto1();
         return;
     }
 
@@ -73,15 +79,54 @@ void execReader()
     noTone(buzzer);     // Stop sound...
     digitalWrite(led, LOW);
 
+
+    unsigned long uid;
+
+    
+    Serial.print(F("UID: "));
+    
+    uid = mfrc522.uid.uidByte[0];
+    Serial.print(uid);
+    Keyboard.print(uid);
+
+    uid = mfrc522.uid.uidByte[1];
+    Serial.print(uid);
+    Keyboard.print(uid);
+
+    uid = mfrc522.uid.uidByte[2];
+    Serial.print(uid);
+    Keyboard.print(uid);
+
+    uid = mfrc522.uid.uidByte[3];
+    Serial.print(uid);
+    Keyboard.print(uid);
+
+    Serial.println("");
+    Keyboard.press(KEY_TAB);
+    Keyboard.release(KEY_TAB);
+    Keyboard.press(KEY_F2);
+    Keyboard.release(KEY_F2);
+
     //PRINT NIM
+    char var;
+    String nim;
     for (uint8_t i = 0; i < 16; i++)
     {
         if (buffer1[i] != 32)
         {
-            Keyboard.write(buffer1[i]);
+            var = buffer1[i];
+            if (var != '\n' && var != '\r') {
+                nim.concat(String(var));
+            }
+            
+            // Serial.println(var);
+            // Keyboard.write(buffer1[i]);
         }
     }
-    
+
+    Serial.print(F("NIM: "));
+    Serial.print(nim);
+    Keyboard.print(nim);
     Keyboard.println("");
 
     //---------------------------------------- GET LAST NAME
