@@ -80,32 +80,32 @@ void execReader()
     digitalWrite(led, LOW);
 
 
-    unsigned long uid;
+    // unsigned long uid;
 
     
-    Serial.print(F("UID: "));
+    // Serial.print(F("UID: "));
     
-    uid = mfrc522.uid.uidByte[0];
-    Serial.print(uid);
-    Keyboard.print(uid);
+    // uid = mfrc522.uid.uidByte[0];
+    // Serial.print(uid);
+    // Keyboard.print(uid);
 
-    uid = mfrc522.uid.uidByte[1];
-    Serial.print(uid);
-    Keyboard.print(uid);
+    // uid = mfrc522.uid.uidByte[1];
+    // Serial.print(uid);
+    // Keyboard.print(uid);
 
-    uid = mfrc522.uid.uidByte[2];
-    Serial.print(uid);
-    Keyboard.print(uid);
+    // uid = mfrc522.uid.uidByte[2];
+    // Serial.print(uid);
+    // Keyboard.print(uid);
 
-    uid = mfrc522.uid.uidByte[3];
-    Serial.print(uid);
-    Keyboard.print(uid);
+    // uid = mfrc522.uid.uidByte[3];
+    // Serial.print(uid);
+    // Keyboard.print(uid);
 
-    Serial.println("");
-    Keyboard.press(KEY_TAB);
-    Keyboard.release(KEY_TAB);
-    Keyboard.press(KEY_F2);
-    Keyboard.release(KEY_F2);
+    // Serial.println("");
+    // Keyboard.press(KEY_TAB);
+    // Keyboard.release(KEY_TAB);
+    // Keyboard.press(KEY_F2);
+    // Keyboard.release(KEY_F2);
 
     //PRINT NIM
     char var;
