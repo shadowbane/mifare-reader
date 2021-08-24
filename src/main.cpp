@@ -22,6 +22,21 @@ void setup() {
     SPI.begin();
     mfrc522.PCD_Init();
     Keyboard.begin();
+
+    // buzzer
+    tone(buzzer, 5000); // Send 1KHz sound signal...
+    digitalWrite(led, HIGH);
+    delay(100);        // ...for 1 sec
+    noTone(buzzer);     // Stop sound...
+    digitalWrite(led, LOW);
+
+    delay(50);        // ...for 1 sec
+
+    tone(buzzer, 5000); // Send 1KHz sound signal...
+    digitalWrite(led, HIGH);
+    delay(100);        // ...for 1 sec
+    noTone(buzzer);     // Stop sound...
+    digitalWrite(led, LOW);
 }
 
 void loop() {
