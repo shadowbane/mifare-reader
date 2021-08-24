@@ -2,10 +2,19 @@
 #include <MFRC522.h>
 #include <Keyboard.h>
 
-#define RST_PIN         9           // Configurable, see typical pin layout above
-#define SS_PIN          10          // Configurable, see typical pin layout above
+#ifdef PLATFORM_MICRO
+#define RST_PIN         9
+#define SS_PIN          10
+const int buzzer = 11;
+const int led = 4;
+#elif defined(PLATFORM_PROMICRO)
+#define RST_PIN         9
+#define SS_PIN          10
 const int buzzer = 7;
 const int led = 5;
+#endif
+
+int ledPin = LED_BUILTIN;
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 
